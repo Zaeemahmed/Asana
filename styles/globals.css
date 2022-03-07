@@ -15,6 +15,19 @@ a {
   box-shadow: 0 4px 12px 0 rgb(0 0 0 / 5%);
 }
 
+.task-container.card {
+  border: 1px rgb(233, 233, 231);
+}
+
+.task-container .card-body {
+  border-radius: 3px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px,
+    rgb(15 15 15 / 10%) 0px 2px 4px;
+}
+
 * {
   box-sizing: border-box;
 }
