@@ -2,9 +2,11 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { Button, Card, Form, Modal } from 'react-bootstrap';
-import allUsersQuery from '../taskModal/allUsers';
+import tasks from '../../pages/board/tasks';
+import allUsersQuery from '../createTaskModal/allUsers';
 import deleteTaskMutation from './deleteTask';
 import updateTaskMutation from './updateTask';
+import UpdateTaskModal from './updateTaskModal';
 
 const Task: React.FC<Task> = ({ title, description, status, id, index }) => {
   const [showModal, setShowModal] = useState(false);
@@ -28,6 +30,7 @@ const Task: React.FC<Task> = ({ title, description, status, id, index }) => {
         title: taskTitle,
         description: taskDescription,
       },
+      update: () => {},
     });
 
     handleClose();
@@ -57,49 +60,42 @@ const Task: React.FC<Task> = ({ title, description, status, id, index }) => {
           </Card>
         )}
       </Draggable>
-
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create a Task</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={onSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                value={taskTitle}
-                onChange={(e) => setTaskTitle(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                value={taskDescription}
-                onChange={(e) => setTaskDescription(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Assigned To</Form.Label>
-              <Form.Select
-                value={taskAssignTo}
-                onChange={(e) => setTaskAssignTo(e.target.value)}
-              >
-                {usersData &&
-                  usersData.users.map((user: any) => (
-                    <option key={user.id} value={user.id}>
-                      {user.name}
-                    </option>
-                  ))}
-              </Form.Select>
-            </Form.Group>
-            <Button type="submit" variant="primary">
-              Update
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
+      <UpdateTaskModal
+        showModal={showModal}
+        onSubmit={onSubmit}
+        handleClose={handleClose}
+      >
+        <Form.Group className="mb-3">
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            type="text"
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            type="text"
+            value={taskDescription}
+            onChange={(e) => setTaskDescription(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Assigned To</Form.Label>
+          <Form.Select
+            value={taskAssignTo}
+            onChange={(e) => setTaskAssignTo(e.target.value)}
+          >
+            {usersData &&
+              usersData.users.map((user: any) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+          </Form.Select>
+        </Form.Group>
+      </UpdateTaskModal>
     </>
   );
 };

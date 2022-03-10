@@ -10,7 +10,7 @@ interface Props {
   boardCategory: string;
 }
 
-const TaskModal: React.FC<Props> = ({
+const createTaskModal: React.FC<Props> = ({
   showModal,
   handleClose,
   boardCategory,
@@ -93,4 +93,4 @@ const TaskModal: React.FC<Props> = ({
   );
 };
 
-export default TaskModal;
+export default createTaskModal;

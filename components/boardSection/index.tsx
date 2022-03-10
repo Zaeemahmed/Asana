@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Task from '../task';
 import { useState } from 'react';
-import TaskModal from '../taskModal';
+import CreateTaskModal from '../createTaskModal';
 import { Droppable } from 'react-beautiful-dnd';
 
 interface BoardSectionProps {
@@ -50,7 +50,7 @@ const BoardSection: React.FC<BoardSectionProps> = ({ title, tasks }) => {
               <FontAwesomeIcon icon={faPlus} />
               Add task
             </Button>
-            <TaskModal
+            <CreateTaskModal
               showModal={showModal}
               handleClose={handleClose}
               boardCategory={title}
