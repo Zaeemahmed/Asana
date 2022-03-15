@@ -3,4 +3,6 @@ declare interface Task {
   description: string;
   id: string;
   status?: string;
+  boardCategory: string;
+  index: number;
 }
