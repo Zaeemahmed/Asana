@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import tasksQuery from '../../pages/board/tasks';
 import allUsersQuery from './allUsers';
 import createTaskMutation from './createTask';
 
@@ -26,6 +27,7 @@ const createTaskModal: React.FC<Props> = ({
       setDescription('');
       setAssignTo('');
     },
+    refetchQueries: [tasksQuery]
   });
 
   const onSubmit = (e) => {
