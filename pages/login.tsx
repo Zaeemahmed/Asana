@@ -11,7 +11,7 @@ const Login = () => {
     if (session) {
       router.push('/board');
     }
-  });
+  }, [session]);
 
   return (
     <div>
