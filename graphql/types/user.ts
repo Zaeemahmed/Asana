@@ -1,4 +1,5 @@
 import { enumType, extendType, nonNull, objectType, stringArg } from 'nexus';
+import { Board } from './board';
 import { Task } from './task';
 
 export const User = objectType({
@@ -18,6 +19,17 @@ export const User = objectType({
                     }
                 })
                 .tasks()
+            }
+        })
+        t.list.field('boards', {
+            type : Board,
+            async resolve(_parent, args, ctx) {
+                return await ctx.prisma.user.findUnique({
+                    where : {
+                        id: _parent.id
+                    }
+                })
+                .boards()
             }
         })
     }

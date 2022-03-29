@@ -20,6 +20,7 @@ model User {
   updatedAt       DateTime @default(now()) @map(name: "updated_at")
   role            Role @default(FREE)
   tasks           Task[]
+  boards          Board[]
 }
 
 
@@ -37,4 +38,14 @@ model Task {
   User            User?    @relation(fields: [userId], references : [id])
   userId          String
   status          String
+  board           Board   @relation(fields: [boardId], references: [id])
+  boardId         String
+}
+
+model Board {
+  id              String @id @default(uuid())
+  tasks           Task[]
+  User            User?    @relation(fields: [userId], references : [id])
+  userId          String
+  title            String
 }

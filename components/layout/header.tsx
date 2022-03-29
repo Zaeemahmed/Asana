@@ -21,7 +21,7 @@ const Header = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed as : 
+            Signed as :
             <a href="#login">{session ? session.user?.name : 'guest'}</a>
           </Navbar.Text>
         </Navbar.Collapse>
