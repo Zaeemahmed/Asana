@@ -2,13 +2,23 @@
 ### Do not make changes to this file directly
 
 
+type Board {
+  id: String
+  tasks: [Task]
+  title: String
+}
+
 type Mutation {
+  createBoard(id: String, title: String!): Board!
   createTask(description: String, id: String, status: String, title: String!, userId: String): Task!
+  deleteBoard(id: String): Board
   deleteTask(id: String): Task
   updateTask(description: String, id: String, status: String, title: String, userId: String): Task
 }
 
 type Query {
+  board(boardId: String!): Board
+  boards: [Board]!
   task(userId: String!): Task
   tasks: [Task]!
   user(email: String!): User
@@ -30,6 +40,7 @@ type Task {
 }
 
 type User {
+  boards: [Board]
   email: String
   id: String
   image: String
