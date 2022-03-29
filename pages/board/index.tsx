@@ -9,6 +9,7 @@ import tasksQuery from './tasks';
 import updateTaskMutation from '../../components/task/updateTask';
 import tasks from './tasks';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 const Board = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -17,6 +18,10 @@ const Board = () => {
       setTasks(data.tasks);
     },
   });
+
+  const { data: session } = useSession();
+
+  console.log(session);
 
   const [updateTask] = useMutation(updateTaskMutation);
   const sections: Array<string> = ['Backlog', 'In-progress', 'Review', 'Done'];
